@@ -1,28 +1,32 @@
 ﻿#include <iostream>
 #include "InventoryManager.h"
 
+// Прототипы вспомогательных функций:
 void displayMenu();
 Date inputDate();
 double inputPositiveDouble(const std::string& prompt);
 int inputPositiveInt(const std::string& prompt);
 
+// Основная логика программы:
 int main()
 {
-	system("chcp 1251");
-	setlocale(LC_ALL, "RUS");
-	InventoryManager manager;
+	system("chcp 1251"); // Настройка кодировки для Windows
+	setlocale(LC_ALL, "RUS"); // Поддержка кириллицы
+	InventoryManager manager; // Создание менеджера склада
 	int choice = 0;
 
+	// Цикл меню:
 	do
 	{
-		displayMenu();
+		displayMenu(); // Вывод меню
 		std::cin >> choice;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
+		// Обработка выбора пользователя:
 		switch (choice)
 		{
-		case 1:
-		{ // Добавить товар
+		case 1: // Добавление товара (с выбором категории)
+		{
 			std::string name;
 			int categoryChoice;
 
@@ -61,8 +65,8 @@ int main()
 			std::cout << "Товар добавлен!\n";
 			break;
 		}
-		case 2:
-		{ // Просмотреть все товары
+		case 2: // Просмотр всех товаров
+		{
 			const auto& items = manager.getAllItems();
 			if (items.empty())
 			{
@@ -79,8 +83,8 @@ int main()
 			}
 			break;
 		}
-		case 3:
-		{ // Пополнить запас
+		case 3: // Пополнение запаса
+		{
 			std::string name;
 			std::cout << "Введите название товара: ";
 			std::getline(std::cin, name);
@@ -98,8 +102,8 @@ int main()
 			std::cout << "Товар пополнен!\n";
 			break;
 		}
-		case 4:
-		{ // Продать товар
+		case 4: // Продажа товара (с проверкой наличия)
+		{
 			std::string name;
 			std::cout << "Введите название товара: ";
 			std::getline(std::cin, name);
@@ -118,8 +122,8 @@ int main()
 			break;
 		}
 		case 5: // Отчет по продажам
-		case 6:
-		{ // Отчет по прибыли
+		case 6: // Отчет по прибыли
+		{
 			Date start = inputDate();
 			Date end = inputDate();
 			std::string filename;
@@ -148,8 +152,9 @@ int main()
 	return 0;
 }
 
-// Функция отображения меню
-void displayMenu() {
+// Вспомогательные функции:
+void displayMenu() // Вывод меню
+{
 	std::cout << "\n=== Меню управления ===\n"
 		<< "1. Добавить новый товар\n"
 		<< "2. Просмотреть все товары\n"
@@ -161,18 +166,21 @@ void displayMenu() {
 		<< "Выберите действие: ";
 }
 
-// Ввод даты с проверкой
-Date inputDate() {
+Date inputDate() // Ввод даты с проверкой валидности
+{
 	int d, m, y;
-	while (true) {
+	while (true)
+	{
 		std::cout << "Введите дату (дд мм гггг): ";
 		std::cin >> d >> m >> y;
-		if (std::cin.fail() || !Date(d, m, y).isValid()) {
+		if (std::cin.fail() || !Date(d, m, y).isValid())
+		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "Некорректная дата! Попробуйте снова.\n";
 		}
-		else {
+		else
+		{
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			break;
 		}
@@ -180,10 +188,11 @@ Date inputDate() {
 	return Date(d, m, y);
 }
 
-// Ввод положительного числа (double)
-double inputPositiveDouble(const std::string& prompt) {
+double inputPositiveDouble(const std::string& prompt) // Ввод положительного числа (double)
+{
 	double value;
-	while (true) {
+	while (true)
+	{
 		std::cout << prompt;
 		std::cin >> value;
 		if (value > 0) break;
@@ -194,10 +203,11 @@ double inputPositiveDouble(const std::string& prompt) {
 	return value;
 }
 
-// Ввод положительного целого числа
-int inputPositiveInt(const std::string& prompt) {
+int inputPositiveInt(const std::string& prompt) // Ввод положительного целого числа
+{
 	int value;
-	while (true) {
+	while (true)
+	{
 		std::cout << prompt;
 		std::cin >> value;
 		if (value > 0) break;
