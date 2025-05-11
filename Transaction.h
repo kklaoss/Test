@@ -13,7 +13,7 @@ class Transaction
 private:
 	Date date;				// Дата транзакции
 	TransactionType type;	// Тип (продажа/пополнение)
-	Stationery* item;		// Указатель на товар (не владеющий)
+	Stationery* item;		// Указатель на товар
 	int quantity;			// Количество товара
 
 public:

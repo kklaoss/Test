@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 #include "InventoryManager.h"
+#include "Date.h"
+#include <memory>
 
 // Прототипы вспомогательных функций:
 void displayMenu();
@@ -20,7 +22,7 @@ int main()
 	{
 		displayMenu(); // Вывод меню
 		std::cin >> choice;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore();
 
 		// Обработка выбора пользователя:
 		switch (choice)
@@ -43,6 +45,7 @@ int main()
 				<< "3. Офисная техника\n"
 				<< "Ваш выбор: ";
 			std::cin >> categoryChoice;
+			std::cin.ignore();
 
 			std::shared_ptr<Stationery> item;
 			switch (categoryChoice)
@@ -176,12 +179,12 @@ Date inputDate() // Ввод даты с проверкой валидности
 		if (std::cin.fail() || !Date(d, m, y).isValid())
 		{
 			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cin.ignore();
 			std::cout << "Некорректная дата! Попробуйте снова.\n";
 		}
 		else
 		{
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cin.ignore();
 			break;
 		}
 	}
@@ -198,7 +201,7 @@ double inputPositiveDouble(const std::string& prompt) // Ввод положит
 		if (value > 0) break;
 		std::cout << "Число должно быть положительным! Попробуйте снова.\n";
 		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore();
 	}
 	return value;
 }
@@ -213,7 +216,7 @@ int inputPositiveInt(const std::string& prompt) // Ввод положитель
 		if (value > 0) break;
 		std::cout << "Число должно быть положительным! Попробуйте снова.\n";
 		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore();
 	}
 	return value;
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include "Transaction.h"
+#include "Stationery.h"
 
 // Класс для управления складом и транзакциями
 class InventoryManager

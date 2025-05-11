@@ -1,6 +1,8 @@
 ﻿#include "InventoryManager.h"
 #include <fstream>
 #include <map>
+#include <algorithm>
+#include <memory>
 
 // Добавление товара в список (через shared_ptr)
 void InventoryManager::addItem(const std::shared_ptr<Stationery>& item)
